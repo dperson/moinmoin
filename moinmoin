@@ -1,0 +1,45 @@
+# From https://github.com/olavgg/moinmoin-wiki
+proxy_cache_path /var/cache/nginx/cache levels=1:2
+            keys_zone=mmcache:10m
+            loader_threshold=300
+            loader_files=200
+            max_size=50m;
+
+upstream uwsgicluster {
+    server unix:///tmp/uwsgi.sock;
+    #server localhost:3031;
+    #server server3:3031;
+}
+
+server {
+    listen 80;
+    rewrite ^(.*) https://$host$1 permanent;
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/local/www/nginx-dist;
+    }
+}
+
+# HTTPS server
+server {
+    listen 443 ssl spdy;
+    proxy_cache mmcache;
+    server_name  localhost;
+    if ($request_uri ~ ^/?$) {
+        rewrite ^.*$ /wiki/ break;
+    }
+
+    ssl_certificate /etc/ssl/certs/cert.pem;
+    ssl_certificate_key /etc/ssl/private/key.pem;
+    ssl_session_timeout  5m;
+
+    location /wiki {
+        proxy_cache_valid any 1m;
+        proxy_cache_min_uses 3;
+        uwsgi_pass uwsgicluster;
+        uwsgi_param SCRIPT_NAME /wiki;
+        include uwsgi_params;
+        uwsgi_modifier1 30;
+    }
+}
