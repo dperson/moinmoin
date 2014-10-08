@@ -11,7 +11,6 @@ RUN apt-get update && \
                 uwsgi uwsgi-plugin-python && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-# Forward request and error logs to docker log collector
 
 # Instal MoinMoin
 RUN curl --retry 5 -LOC- -s http://static.moinmo.in/files/moin-1.9.7.tar.gz && \
