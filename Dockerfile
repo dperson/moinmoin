@@ -24,7 +24,8 @@ RUN curl --retry 5 -LOC- -s http://static.moinmo.in/files/moin-1.9.7.tar.gz && \
 
 # Configure
 COPY docker.png /usr/local/lib/python2.7/dist-packages/MoinMoin/web/static/htdocs/common/
-RUN sed -e '/logo_string/ { s/moinmoin/docker/; s/MoinMoin // }' \
+RUN ln -sf /usr/share/zoneinfo/EST5EDT /etc/localtime && \
+    sed -e '/logo_string/ { s/moinmoin/docker/; s/MoinMoin // }' \
                 -e '/url_prefix_static/ {s/#\(url_prefix_static\)/\1/; s/my//}'\
                 -e '/page_front_page.*Front/s/#\(page_front_page\)/\1/' \
                 -e '/superuser/ { s/#\(superuser\)/\1/; s/YourName/mmAdmin/ }' \
