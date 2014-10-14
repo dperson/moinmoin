@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Instal MoinMoin
-RUN curl --retry 5 -LOC- -s http://static.moinmo.in/files/moin-1.9.7.tar.gz && \
+RUN curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
     sha256sum moin-$version.tar.gz | cut -d' ' -f1 | grep -q "$sha256sum" || \
                 exit 1 && \
     mkdir moinmoin && \
