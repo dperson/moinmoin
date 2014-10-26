@@ -39,4 +39,4 @@ VOLUME ["/usr/local/share/moin/data"]
 
 EXPOSE 3031
 
-ENTRYPOINT moin.sh
+ENTRYPOINT ["moin.sh"]
