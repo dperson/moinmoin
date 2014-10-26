@@ -1,3 +1,5 @@
+[![logo](http://moinmo.in/moin_static19/common/moinmoin.png)](http://moinmo.in/)
+
 # MoinMoin
 
 Moinmoin wiki on uWSGI docker image
@@ -8,10 +10,6 @@ MoinMoin is an advanced, easy to use and extensible WikiEngine with a large
 community of users. Said in a few words, it is about collaboration on easily
 editable web pages.
 
-[moinmo.in](http://moinmo.in/)
-
-![logo](http://moinmo.in/moin_static19/common/moinmoin.png)
-
 # How to use this image
 
 ## Hosting a simple wiki (still needs a web server in front of it)
@@ -21,18 +19,51 @@ editable web pages.
 ## Complex configuration
 
     sudo docker run --name wiki -d dperson/moinmoin
-    sudo docker run --name web --link wiki:wiki -p 80:80 -p 443:443 -d dperson/nginx
+    sudo docker run --name web --link wiki:wiki -p 80:80 -p 443:443 -d \
+                dperson/nginx -u "wiki:3031;/wiki"
 
-A nginx site file for moinmoin is available from:
+A separate nginx site file for moinmoin is available from:
 [moinmoin](https://raw.githubusercontent.com/dperson/moinmoin/master/moinmoin)
 
-Admin user is set to 'mmAdmin'. To use, create a new user named 'mmAdmin' and
-set your desired password. Volums are used, to ease backups, etc.
+Default Admin user is set to 'mmAdmin'. To use, create a new user named
+'mmAdmin' and set your desired password. Volums are used, to ease backups, etc.
 
-If you wish to adapt the default configuration, use something like the following
-to copy it from a running container:
+## Configuration
 
-    sudo docker cp wiki:/some/file/or/directory /some/path
+    sudo docker run -it --rm dperson/moinmoin -h
+
+    Usage: moin.sh [-opt] [command]
+    Options (fields in '[]' are optional, '<>' are required):
+        -h          This help
+        -p "</prefix>" Configure URI prefix for wiki, if you want other than /wiki
+                    required arg: "</prefix>" - URI location
+        -s "<super>" Configure superuser (admin ID) for the wiki
+                    required arg: "<UserName>" - The user to manage the wiki
+        -t ""       Configure timezone (defaults to EST5EDT)
+                    possible arg: "[timezone]" - zoneinfo timezone for container
+
+    The 'command' (if provided and valid) will be run instead of moinmoin
+
+## Examples
+
+Any of the commands can be run at creation with `docker run` or later with
+`docker exec moin.sh` (as of version 1.3 of docker).
+
+    sudo docker run --name wiki -d dperson/moinmoin
+    sudo docker exec wiki moin.sh -t EST5EDT ls -AlF /etc/localtime
+    sudo docker start wiki
+
+### Start moinmoin, and configure the prefix URI:
+
+    sudo docker run --rm dperson/moinmoin -p /otherwiki
+
+### Start moinmoin, and configure the super (admin) user:
+
+    sudo docker run --rm dperson/moinmoin -s bob
+
+### Start moinmoin, and configure the timezone:
+
+    sudo docker run --rm dperson/moinmoin -t EST5EDT
 
 # User Feedback
 
