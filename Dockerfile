@@ -2,20 +2,17 @@ FROM ubuntu:trusty
 MAINTAINER David Personette <dperson@dperson.com>
 
 # MoinMoin file info
-ENV version 1.9.7
-ENV sha256sum f4ba1b5c956bd96d2a61e27e68d297aa63d1afbc80d5740e139dcdf0affb4db5
+ENV version 1.9.8
+ENV sha256sum a74ba7fd8cf09b9e8415a4c45d7389ea910c09932da50359ea9796e3a30911a6
 
-# Install nginx and uwsgi
+# Install uwsgi and MoinMoin
 RUN apt-get update && \
     apt-get install -qqy --no-install-recommends curl python \
                 uwsgi uwsgi-plugin-python && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Instal MoinMoin
-RUN curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
-    sha256sum moin-${version}.tar.gz | cut -d' ' -f1 | grep -q "$sha256sum" || \
-                exit 1 && \
+    rm -rf /var/lib/apt/lists/* && \
+    curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
+    sha256sum moin-${version}.tar.gz | grep -q "$sha256sum" && \
     mkdir moinmoin && \
     tar -xf moin-${version}.tar.gz -C moinmoin --strip-components=1 && \
     (cd moinmoin && \
