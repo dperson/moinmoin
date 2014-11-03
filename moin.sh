@@ -89,9 +89,9 @@ while getopts ":hp:s:t:" opt; do
 done
 shift $(( OPTIND - 1 ))
 
-[[ "$PREFIX" ]] && prefix "$PREFIX"
-[[ "$SUPER" ]] && super "$SUPER"
-[[ "$TIMEZONE" ]] && timezone "$TIMEZONE"
+[[ "${PREFIX:-""}" ]] && prefix "$PREFIX"
+[[ "${SUPER:-""}" ]] && super "$SUPER"
+[[ "${TIMEZONE:-""}" ]] && timezone "$TIMEZONE"
 
 chown -Rh www-data. /usr/local/share/moin/data \
             /usr/local/share/moin/underlay
