@@ -6,7 +6,8 @@ ENV version 1.9.8
 ENV sha256sum a74ba7fd8cf09b9e8415a4c45d7389ea910c09932da50359ea9796e3a30911a6
 
 # Install uwsgi and MoinMoin
-RUN apt-get update && \
+RUN export TERM=dumb && \
+    apt-get update -qq && \
     apt-get install -qqy --no-install-recommends curl python \
                 uwsgi uwsgi-plugin-python && \
     apt-get clean && \
