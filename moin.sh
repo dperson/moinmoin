@@ -26,7 +26,7 @@ prefix() {
     local prefix="$1"
     local file=/usr/local/share/moin/wikiconfig.py
 
-    sed -i '/url_prefix_static = /s|'"'"'.*'"'"'|'"'$prefix'"'|' $file
+    sed -i '/url_prefix_static = /s|'"'.*'"'|'"'$prefix'"'|' $file
 }
 
 ### super: Configure admin user for wiki
@@ -88,6 +88,10 @@ while getopts ":hp:s:t:" opt; do
     esac
 done
 shift $(( OPTIND - 1 ))
+
+[[ "$PREFIX" ]] && prefix "$PREFIX"
+[[ "$SUPER" ]] && super "$SUPER"
+[[ "$TIMEZONE" ]] && timezone "$TIMEZONE"
 
 chown -Rh www-data. /usr/local/share/moin/data \
             /usr/local/share/moin/underlay
