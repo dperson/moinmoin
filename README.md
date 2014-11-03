@@ -56,7 +56,9 @@ Any of the commands can be run at creation with `docker run` or later with
 `docker exec moin.sh` (as of version 1.3 of docker).
 
     sudo docker run --name wiki -d dperson/moinmoin -t EST5EDT
+
 Will get you the same settings as
+
     sudo docker run --name wiki -d dperson/moinmoin
     sudo docker exec wiki moin.sh -t EST5EDT ls -AlF /etc/localtime
     sudo docker start wiki
@@ -64,19 +66,25 @@ Will get you the same settings as
 ### Start moinmoin, and configure the prefix URI:
 
     sudo docker run --rm dperson/moinmoin -p /otherwiki
+
 OR
+
     sudo docker run --rm -e PREFIX=/otherwiki dperson/moinmoin
 
 ### Start moinmoin, and configure the super (admin) user:
 
     sudo docker run --rm dperson/moinmoin -s bob
+
 OR
+
     sudo docker run --rm -e SUPER=bob dperson/moinmoin
 
 ### Start moinmoin, and configure the timezone:
 
     sudo docker run --rm dperson/moinmoin -t EST5EDT
+
 OR
+
     sudo docker run --rm -e TIMEZONE=EST5EDT dperson/moinmoin
 
 # User Feedback
