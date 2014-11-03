@@ -61,7 +61,7 @@ Will get you the same settings as
 
     sudo docker run --name wiki -d dperson/moinmoin
     sudo docker exec wiki moin.sh -t EST5EDT ls -AlF /etc/localtime
-    sudo docker start wiki
+    sudo docker restart wiki
 
 ### Start moinmoin, and configure the prefix URI:
 
