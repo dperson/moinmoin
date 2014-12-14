@@ -10,14 +10,13 @@ RUN TERM=dumb apt-get update -qq && \
     TERM=dumb apt-get install -qqy --no-install-recommends curl python \
                 uwsgi uwsgi-plugin-python && \
     TERM=dumb apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
     curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
     sha256sum moin-${version}.tar.gz | grep -q "$sha256sum" && \
     mkdir moinmoin && \
     tar -xf moin-${version}.tar.gz -C moinmoin --strip-components=1 && \
     (cd moinmoin && \
     python setup.py install --force --prefix=/usr/local >/dev/null) && \
-    rm -r moinmoin moin-${version}.tar.gz
+    rm -rf /var/lib/apt/lists/* /tmp/* moinmoin moin-${version}.tar.gz
 
 # Configure
 COPY docker.png /usr/local/lib/python2.7/dist-packages/MoinMoin/web/static/htdocs/common/
