@@ -1,15 +1,17 @@
 FROM ubuntu:trusty
 MAINTAINER David Personette <dperson@dperson.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 # MoinMoin file info
 ENV version 1.9.8
 ENV sha256sum a74ba7fd8cf09b9e8415a4c45d7389ea910c09932da50359ea9796e3a30911a6
 
 # Install uwsgi and MoinMoin
-RUN TERM=dumb apt-get update -qq && \
-    TERM=dumb apt-get install -qqy --no-install-recommends curl python \
-                uwsgi uwsgi-plugin-python && \
-    TERM=dumb apt-get clean && \
+RUN apt-get update -qq && \
+    apt-get install -qqy --no-install-recommends curl python uwsgi \
+                uwsgi-plugin-python && \
+    apt-get clean && \
     curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
     sha256sum moin-${version}.tar.gz | grep -q "$sha256sum" && \
     mkdir moinmoin && \
