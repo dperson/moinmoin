@@ -102,7 +102,7 @@ elif [[ $# -ge 1 ]]; then
     echo "ERROR: command not found: $1"
     exit 13
 else
-    uwsgi --uid www-data \
+    exec uwsgi --uid www-data \
                 -s /tmp/uwsgi.sock \
                 --uwsgi-socket 0.0.0.0:3031 \
                 --plugins python \
