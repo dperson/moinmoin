@@ -22,10 +22,7 @@ set -o nounset                              # Treat unset variables as an error
 # Arguments:
 #   prefix) URI
 # Return: setup URI
-prefix() {
-    local prefix="$1"
-    local file=/usr/local/share/moin/wikiconfig.py
-
+prefix() { local prefix="$1" file=/usr/local/share/moin/wikiconfig.py
     sed -i '/url_prefix_static = /s|'"'.*'"'|'"'$prefix'"'|' $file
 }
 
@@ -33,10 +30,7 @@ prefix() {
 # Arguments:
 #   super) admin ID
 # Return: setup admin ID
-super() {
-    local super="$1"
-    local file=/usr/local/share/moin/wikiconfig.py
-
+super() { local super="$1" file=/usr/local/share/moin/wikiconfig.py
     sed -i '/superuser/s/".*"/"'"$super"'"/' $file
 }
 
@@ -44,9 +38,7 @@ super() {
 # Arguments:
 #   timezone) for example EST5EDT
 # Return: the correct zoneinfo file will be symlinked into place
-timezone() {
-    local timezone="${1:-EST5EDT}"
-
+timezone() { local timezone="${1:-EST5EDT}"
     [[ -e /usr/share/zoneinfo/$timezone ]] || {
         echo "ERROR: invalid timezone specified" >&2
         return
@@ -59,9 +51,7 @@ timezone() {
 # Arguments:
 #   none)
 # Return: Help text
-usage() {
-    local RC=${1:-0}
-
+usage() { local RC=${1:-0}
     echo "Usage: ${0##*/} [-opt] [command]
 Options (fields in '[]' are optional, '<>' are required):
     -h          This help
