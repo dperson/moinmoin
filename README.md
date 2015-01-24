@@ -65,27 +65,27 @@ Will get you the same settings as
 
 ### Start moinmoin, and configure the prefix URI:
 
-    sudo docker run --rm -d dperson/moinmoin -p /otherwiki
+    sudo docker run -d dperson/moinmoin -p /otherwiki
 
 OR
 
-    sudo docker run --rm -e PREFIX=/otherwiki -d dperson/moinmoin
+    sudo docker run -e PREFIX=/otherwiki -d dperson/moinmoin
 
 ### Start moinmoin, and configure the super (admin) user:
 
-    sudo docker run --rm -d dperson/moinmoin -s bob
+    sudo docker run -d dperson/moinmoin -s bob
 
 OR
 
-    sudo docker run --rm -e SUPER=bob -d dperson/moinmoin
+    sudo docker run -e SUPER=bob -d dperson/moinmoin
 
 ### Start moinmoin, and configure the timezone:
 
-    sudo docker run --rm -d dperson/moinmoin -t EST5EDT
+    sudo docker run -d dperson/moinmoin -t EST5EDT
 
 OR
 
-    sudo docker run --rm -e TIMEZONE=EST5EDT -d dperson/moinmoin
+    sudo docker run -e TIMEZONE=EST5EDT -d dperson/moinmoin
 
 # User Feedback
 
