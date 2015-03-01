@@ -92,6 +92,8 @@ elif [[ $# -ge 1 ]]; then
     echo "ERROR: command not found: $1"
     exit 13
 else
+    ln -sf /dev/stdout /usr/local/share/moin/data/event-log
+    ln -sf /dev/stderr /usr/local/share/moin/data/error-log
     exec uwsgi --uid www-data \
                 -s /tmp/uwsgi.sock \
                 --uwsgi-socket 0.0.0.0:3031 \
@@ -100,6 +102,7 @@ else
                 --chdir /usr/local/share/moin \
                 --python-path /usr/local/share/moin \
                 --wsgi-file server/moin.wsgi \
+                --logto /dev/stdout
                 --master \
                 --processes 4 \
                 --harakiri 30 \
