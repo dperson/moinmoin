@@ -93,7 +93,7 @@ elif [[ $# -ge 1 ]]; then
     exit 13
 else
     ln -sf /dev/stdout /usr/local/share/moin/data/event-log
-    ln -sf /dev/stderr /usr/local/share/moin/data/error-log
+    ln -sf /dev/stdout /usr/local/share/moin/data/error-log
     exec uwsgi --uid www-data \
                 -s /tmp/uwsgi.sock \
                 --uwsgi-socket 0.0.0.0:3031 \
