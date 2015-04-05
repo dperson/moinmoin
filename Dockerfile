@@ -24,8 +24,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 /usr/local/share/moin/wikiconfig.py && \
     chown -Rh www-data. /usr/local/share/moin/data \
                 /usr/local/share/moin/underlay && \
-    apt-get purge curl && \
-    apt-get autoremove && apt-get clean && \
+    apt-get purge -qqy curl && \
+    apt-get autoremove -qqy && apt-get clean -qqy && \
     rm -rf /tmp/* /var/lib/apt/lists/* moinmoin moin-${version}.tar.gz
 COPY docker.png /usr/local/lib/python2.7/dist-packages/MoinMoin/web/static/htdocs/common/
 COPY moin.sh /usr/bin/
