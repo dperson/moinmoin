@@ -1,4 +1,4 @@
-[![logo](http://moinmo.in/moin_static19/common/moinmoin.png)](http://moinmo.in/)
+[![logo](https://upload.wikimedia.org/wikipedia/commons/3/3f/Moinmoin.png)](http://moinmo.in/)
 
 # MoinMoin
 
