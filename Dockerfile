@@ -9,14 +9,12 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install -qqy --no-install-recommends curl python uwsgi \
                 uwsgi-plugin-python \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
-    apt-get clean && \
     curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
     sha256sum moin-${version}.tar.gz | grep -q "$sha256sum" && \
     mkdir moinmoin && \
     tar -xf moin-${version}.tar.gz -C moinmoin --strip-components=1 && \
     (cd moinmoin && \
     python setup.py install --force --prefix=/usr/local >/dev/null) && \
-    rm -rf /var/lib/apt/lists/* /tmp/* moinmoin moin-${version}.tar.gz && \
     sed -e '/logo_string/ { s/moinmoin/docker/; s/MoinMoin // }' \
                 -e '/url_prefix_static/ {s/#\(url_prefix_static\)/\1/; s/my//}'\
                 -e '/page_front_page.*Front/s/#\(page_front_page\)/\1/' \
@@ -25,7 +23,10 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 /usr/local/share/moin/config/wikiconfig.py > \
                 /usr/local/share/moin/wikiconfig.py && \
     chown -Rh www-data. /usr/local/share/moin/data \
-                /usr/local/share/moin/underlay
+                /usr/local/share/moin/underlay && \
+    apt-get purge curl && \
+    apt-get autoremove && apt-get clean && \
+    rm -rf /tmp/* /var/lib/apt/lists/* moinmoin moin-${version}.tar.gz
 COPY docker.png /usr/local/lib/python2.7/dist-packages/MoinMoin/web/static/htdocs/common/
 COPY moin.sh /usr/bin/
 
