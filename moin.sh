@@ -86,7 +86,9 @@ shift $(( OPTIND - 1 ))
 chown -Rh www-data. /usr/local/share/moin/data \
             /usr/local/share/moin/underlay
 
-if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
+if ps -ef | grep -q uwsgi; then
+    echo "Service already running, please restart container to apply changes"
+elif [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
 elif [[ $# -ge 1 ]]; then
     echo "ERROR: command not found: $1"
