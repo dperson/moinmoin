@@ -86,7 +86,7 @@ shift $(( OPTIND - 1 ))
 chown -Rh www-data. /usr/local/share/moin/data \
             /usr/local/share/moin/underlay
 
-if ps -ef | grep -q uwsgi; then
+if ps -ef | egrep -v grep | grep -q uwsgi; then
     echo "Service already running, please restart container to apply changes"
 elif [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
