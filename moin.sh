@@ -85,8 +85,7 @@ shift $(( OPTIND - 1 ))
 [[ "${SUPER:-""}" ]] && super "$SUPER"
 [[ "${TIMEZONE:-""}" ]] && timezone "$TIMEZONE"
 
-chown -Rh www-data. /usr/local/share/moin/data \
-            /usr/local/share/moin/underlay
+chown -Rh www-data. /usr/local/share/moin/data /usr/local/share/moin/underlay
 
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
