@@ -48,14 +48,20 @@ ENVIROMENT VARIABLES (only available with `docker run`)
 
  * `PREFIX` - An above, set a URI where the app lives, IE `/wiki2`
  * `SUPER` - As above, set the super (admin) user for the wiki
- * `TIMEZONE` - As above, set a zoneinfo timezone, IE `EST5EDT`
+ * `TZ` - As above, set a zoneinfo timezone, IE `EST5EDT`
 
 ## Examples
 
 Any of the commands can be run at creation with `docker run` or later with
 `docker exec moin.sh` (as of version 1.3 of docker).
 
-    sudo docker run --name wiki -d dperson/moinmoin -t EST5EDT
+### Start moinmoin, and configure the timezone:
+
+    sudo docker run -d dperson/moinmoin -t EST5EDT
+
+OR using `environment variables`
+
+    sudo docker run -e TZ=EST5EDT -d dperson/moinmoin
 
 Will get you the same settings as
 
@@ -78,14 +84,6 @@ OR
 OR
 
     sudo docker run -e SUPER=bob -d dperson/moinmoin
-
-### Start moinmoin, and configure the timezone:
-
-    sudo docker run -d dperson/moinmoin -t EST5EDT
-
-OR
-
-    sudo docker run -e TIMEZONE=EST5EDT -d dperson/moinmoin
 
 # User Feedback
 
