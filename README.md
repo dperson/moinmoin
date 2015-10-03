@@ -48,7 +48,9 @@ ENVIROMENT VARIABLES (only available with `docker run`)
 
  * `PREFIX` - An above, set a URI where the app lives, IE `/wiki2`
  * `SUPER` - As above, set the super (admin) user for the wiki
- * `TZ` - As above, set a zoneinfo timezone, IE `EST5EDT`
+ * `TZ` - As above, configure the zoneinfo timezone, IE `EST5EDT`
+ * `USERID` - Set the UID for the app user
+ * `GROUPID` - Set the GID for the app user
 
 ## Examples
 
