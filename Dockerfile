@@ -20,8 +20,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 -e '/page_front_page.*Front/s/#\(page_front_page\)/\1/' \
                 -e '/superuser/ { s/#\(superuser\)/\1/; s/YourName/mmAdmin/ }' \
                 -e '/page_front_page/s/#u/u/' \
-                /usr/local/share/moin/config/wikiconfig.py > \
-                /usr/local/share/moin/wikiconfig.py && \
+                /usr/local/share/moin/config/wikiconfig.py \
+                >/usr/local/share/moin/wikiconfig.py && \
     chown -Rh www-data. /usr/local/share/moin/data \
                 /usr/local/share/moin/underlay && \
     apt-get purge -qqy curl && \
