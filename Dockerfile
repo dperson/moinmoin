@@ -9,7 +9,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install -qqy --no-install-recommends curl python uwsgi \
                 uwsgi-plugin-python \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
-    curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
+    curl -LOC- http://static.moinmo.in/files/moin-${version}.tar.gz && \
     sha256sum moin-${version}.tar.gz | grep -q "$sha256sum" && \
     mkdir moinmoin && \
     tar -xf moin-${version}.tar.gz -C moinmoin --strip-components=1 && \
