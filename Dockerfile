@@ -30,8 +30,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
 COPY docker.png /usr/local/lib/python2.7/dist-packages/MoinMoin/web/static/htdocs/common/
 COPY moin.sh /usr/bin/
 
-VOLUME ["/run", "/tmp", "/var/cache", "/var/lib", "/var/log", "/var/tmp", \
-            "/usr/local/share/moin/data", "/usr/local/share/moin/underlay"]
+VOLUME ["/usr/local/share/moin/data", "/usr/local/share/moin/underlay"]
 
 EXPOSE 3031
 
