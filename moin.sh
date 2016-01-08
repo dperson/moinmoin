@@ -71,8 +71,6 @@ The 'command' (if provided and valid) will be run instead of moinmoin
     exit $RC
 }
 
-cd /tmp
-
 while getopts ":hp:s:t:" opt; do
     case "$opt" in
         h) usage ;;
