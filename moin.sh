@@ -59,8 +59,8 @@ usage() { local RC=${1:-0}
     echo "Usage: ${0##*/} [-opt] [command]
 Options (fields in '[]' are optional, '<>' are required):
     -h          This help
-    -p \"</prefix>\" Configure URI prefix for wiki, if you want other than /wiki
-                required arg: \"</prefix>\" - URI location
+    -p \"</prefix>\" Configure URI prefix for wiki, if you want other than
+                /wiki required arg: \"</prefix>\" - URI location
     -s \"<super>\" Configure superuser (admin ID) for the wiki
                 required arg: \"<UserName>\" - The user to manage the wiki
     -t \"\"       Configure timezone (defaults to EST5EDT)

@@ -14,12 +14,12 @@ editable web pages.
 
 ## Hosting a simple wiki (still needs a web server in front of it)
 
-    sudo docker run --name wiki -p 3031:3031 -d dperson/moinmoin
+    sudo docker run -it --name wiki -p 3031:3031 -d dperson/moinmoin
 
 ## Complex configuration
 
-    sudo docker run --name wiki -d dperson/moinmoin
-    sudo docker run --name web --link wiki:wiki -p 80:80 -p 443:443 -d \
+    sudo docker run -it --name wiki -d dperson/moinmoin
+    sudo docker run -it --name web --link wiki:wiki -p 80:80 -p 443:443 -d \
                 dperson/nginx -u "wiki:3031;/wiki"
 
 A separate nginx site file for moinmoin is available from:
@@ -35,8 +35,8 @@ Default Admin user is set to 'mmAdmin'. To use, create a new user named
     Usage: moin.sh [-opt] [command]
     Options (fields in '[]' are optional, '<>' are required):
         -h          This help
-        -p "</prefix>" Configure URI prefix for wiki, if you want other than /wiki
-                    required arg: "</prefix>" - URI location
+        -p "</prefix>" Configure URI prefix for wiki, if you want other than
+                    /wiki required arg: "</prefix>" - URI location
         -s "<super>" Configure superuser (admin ID) for the wiki
                     required arg: "<UserName>" - The user to manage the wiki
         -t ""       Configure timezone (defaults to EST5EDT)
@@ -55,37 +55,37 @@ ENVIRONMENT VARIABLES (only available with `docker run`)
 ## Examples
 
 Any of the commands can be run at creation with `docker run` or later with
-`docker exec moin.sh` (as of version 1.3 of docker).
+`docker exec -it moin.sh` (as of version 1.3 of docker).
 
 ### Start moinmoin, and configure the timezone:
 
-    sudo docker run -d dperson/moinmoin -t EST5EDT
+    sudo docker run -it -d dperson/moinmoin -t EST5EDT
 
 OR using `environment variables`
 
-    sudo docker run -e TZ=EST5EDT -d dperson/moinmoin
+    sudo docker run -it -e TZ=EST5EDT -d dperson/moinmoin
 
 Will get you the same settings as
 
-    sudo docker run --name wiki -d dperson/moinmoin
-    sudo docker exec wiki moin.sh -t EST5EDT ls -AlF /etc/localtime
+    sudo docker run -it --name wiki -d dperson/moinmoin
+    sudo docker exec -it wiki moin.sh -t EST5EDT ls -AlF /etc/localtime
     sudo docker restart wiki
 
 ### Start moinmoin, and configure the prefix URI:
 
-    sudo docker run -d dperson/moinmoin -p /otherwiki
+    sudo docker run -it -d dperson/moinmoin -p /otherwiki
 
 OR
 
-    sudo docker run -e PREFIX=/otherwiki -d dperson/moinmoin
+    sudo docker run -it -e PREFIX=/otherwiki -d dperson/moinmoin
 
 ### Start moinmoin, and configure the super (admin) user:
 
-    sudo docker run -d dperson/moinmoin -s bob
+    sudo docker run -it -d dperson/moinmoin -s bob
 
 OR
 
-    sudo docker run -e SUPER=bob -d dperson/moinmoin
+    sudo docker run -it -e SUPER=bob -d dperson/moinmoin
 
 # User Feedback
 
