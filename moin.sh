@@ -31,7 +31,7 @@ prefix() { local prefix="$1" file=/usr/local/share/moin/wikiconfig.py
 #   super) admin ID
 # Return: setup admin ID
 super() { local super="$1" file=/usr/local/share/moin/wikiconfig.py
-    sed -i '/superuser/s/".*"/"'"$super"'"/' $file
+    sed -i '/superuser/s|".*"|"'"$super"'"|' $file
 }
 
 ### timezone: Set the timezone for the container
