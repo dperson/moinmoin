@@ -112,5 +112,7 @@ else
                 --master \
                 --processes 4 \
                 --harakiri 30 \
-                --die-on-term
+                --die-on-term \
+                --thunder-lock \
+                --enable-threads
 fi
