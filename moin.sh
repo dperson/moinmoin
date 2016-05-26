@@ -108,7 +108,6 @@ else
                 --chdir /usr/local/share/moin \
                 --python-path /usr/local/share/moin \
                 --wsgi-file server/moin.wsgi \
-                --logto /dev/stdout \
                 --master \
                 --processes 4 \
                 --harakiri 30 \
