@@ -5,6 +5,7 @@ MAINTAINER David Personette <dperson@gmail.com>
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     export version='1.9.8' && \
     export sha256sum='a74ba7fd8cf09b9e8415a4c45d7389ea910c09932da50359ea97' && \
+    sed -i 's/stretch /sid /g' /etc/apt/sources.list
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends curl python uwsgi \
                 uwsgi-plugin-python \
