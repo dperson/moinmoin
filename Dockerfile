@@ -7,7 +7,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export sha256sum='a74ba7fd8cf09b9e8415a4c45d7389ea910c09932da50359ea97' && \
     sed -i 's/stretch /sid /g' /etc/apt/sources.list && \
     apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends curl python uwsgi \
+    apt-get install -qqy --no-install-recommends curl psutils python uwsgi \
                 uwsgi-plugin-python \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     echo "downloading moin-${version}.tar.gz" && \
