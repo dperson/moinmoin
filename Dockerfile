@@ -8,10 +8,10 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export url='https://bitbucket.org/thomaswaldmann/moin-1.9/commits' && \
     export sha256sum='4397d7760b7ae324d7914ffeb1a9eeb15e09933b61468072acd3' && \
     sed -i 's/stretch /sid /g' /etc/apt/sources.list && \
-    apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends ca-certificates  curl procps \
-                python uwsgi uwsgi-plugin-python \
-                $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
+    apt update -qq && \
+    apt install -qqy --no-install-recommends ca-certificates  curl procps \
+                patch python uwsgi uwsgi-plugin-python \
+                $(apt -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     echo "downloading moin-${version}.tar.gz" && \
     curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
     curl -LOC- -s "${url}/${patch}/raw" && \
@@ -30,8 +30,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 >/usr/local/share/moin/wikiconfig.py && \
     chown -Rh www-data. /usr/local/share/moin/data \
                 /usr/local/share/moin/underlay && \
-    apt-get purge -qqy curl && \
-    apt-get autoremove -qqy && apt-get clean -qqy && \
+    apt purge -qqy ca-certificates curl patch && \
+    apt autoremove -qqy && apt clean -qqy && \
     rm -rf /tmp/* /var/lib/apt/lists/* moinmoin moin-${version}.tar.gz raw
 COPY docker.png /usr/local/lib/python2.7/dist-packages/MoinMoin/web/static/htdocs/common/
 COPY moin.sh /usr/bin/
