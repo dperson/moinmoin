@@ -19,7 +19,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     mkdir moinmoin && \
     tar -xf moin-${version}.tar.gz -C moinmoin --strip-components=1 && \
     (cd moinmoin && \
-    patch -p0 ../raw
+    patch -p0 ../raw && \
     python setup.py install --force --prefix=/usr/local >/dev/null) && \
     sed -e '/logo_string/ { s/moinmoin/docker/; s/MoinMoin // }' \
                 -e '/url_prefix_static/ {s/#\(url_prefix_static\)/\1/; s/my//}'\
