@@ -9,8 +9,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export sha256sum='4397d7760b7ae324d7914ffeb1a9eeb15e09933b61468072acd3' && \
     sed -i 's/stretch /sid /g' /etc/apt/sources.list && \
     apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends curl procps python uwsgi \
-                uwsgi-plugin-python \
+    apt-get install -qqy --no-install-recommends ca-certificates  curl procps \
+                python uwsgi uwsgi-plugin-python \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     echo "downloading moin-${version}.tar.gz" && \
     curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
