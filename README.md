@@ -2,7 +2,8 @@
 
 # MoinMoin
 
-Moinmoin wiki on uWSGI docker container
+Moinmoin wiki on uWSGI docker container with Markdown.
+This is a fork of dperson/moinmoin, it just adds the python-markdown package so that pages using Markdown render correctly rather than generating a HTTP 503 error.
 
 # What is MoinMoin?
 

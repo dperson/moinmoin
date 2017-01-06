@@ -10,7 +10,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     sed -i 's/stretch /sid /g' /etc/apt/sources.list && \
     apt update -qq && \
     apt install -qqy --no-install-recommends ca-certificates  curl procps \
-                patch python uwsgi uwsgi-plugin-python \
+                patch python uwsgi uwsgi-plugin-python python-markdown \
                 $(apt -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     echo "downloading moin-${version}.tar.gz" && \
     curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
