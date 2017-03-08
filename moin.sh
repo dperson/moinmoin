@@ -100,7 +100,7 @@ elif [[ $# -ge 1 ]]; then
 elif ps -ef | egrep -v grep | grep -q uwsgi; then
     echo "Service already running, please restart container to apply changes"
 else
-    [[ "$LANG" ]] || export LANG=en_US.UTF-8
+    [[ "${LANG:-""}" ]] || export LANG=en_US.UTF-8
     exec uwsgi --uid www-data \
                 -s /tmp/uwsgi.sock \
                 --uwsgi-socket 0.0.0.0:3031 \
