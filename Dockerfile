@@ -13,8 +13,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 patch python python-markdown uwsgi uwsgi-plugin-python \
                 $(apt -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     echo "downloading moin-${version}.tar.gz" && \
-    curl -LOC- -s http://static.moinmo.in/files/moin-${version}.tar.gz && \
-    curl -LOC- -s "${url}/${patch}/raw" && \
+    curl -LOSs http://static.moinmo.in/files/moin-${version}.tar.gz && \
+    curl -LOSs "${url}/${patch}/raw" && \
     sha256sum moin-${version}.tar.gz | grep -q "$sha256sum" && \
     mkdir moinmoin && \
     tar -xf moin-${version}.tar.gz -C moinmoin --strip-components=1 && \
