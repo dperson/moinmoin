@@ -17,7 +17,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     curl -LOSs http://static.moinmo.in/files/$file && \
     curl -LOSs "${url}/${patch}/raw" && \
     sha256sum $file | grep -q "$sha256sum" || \
-    { echo "expected $sha1sum, got $(sha1sum $file)"; exit; } && \
+    { echo "expected $sha256sum, got $(sha256sum $file)"; exit 13; } && \
     mkdir moinmoin && \
     tar -xf $file -C moinmoin --strip-components=1 && \
     (cd moinmoin && \
