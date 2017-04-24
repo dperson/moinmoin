@@ -12,12 +12,14 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt install -qqy --no-install-recommends ca-certificates  curl procps \
                 patch python python-markdown uwsgi uwsgi-plugin-python \
                 $(apt -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
-    echo "downloading moin-${version}.tar.gz" && \
-    curl -LOSs http://static.moinmo.in/files/moin-${version}.tar.gz && \
+    file="moin-${version}.tar.gz" && \
+    echo "downloading $file ..." && \
+    curl -LOSs http://static.moinmo.in/files/$file && \
     curl -LOSs "${url}/${patch}/raw" && \
-    sha256sum moin-${version}.tar.gz | grep -q "$sha256sum" && \
+    sha256sum $file | grep -q "$sha256sum" || \
+    { echo "expected $sha1sum, got $(sha1sum $file)"; exit; } && \
     mkdir moinmoin && \
-    tar -xf moin-${version}.tar.gz -C moinmoin --strip-components=1 && \
+    tar -xf $file -C moinmoin --strip-components=1 && \
     (cd moinmoin && \
     patch -p0 ../raw && \
     python setup.py install --force --prefix=/usr/local >/dev/null) && \
@@ -32,7 +34,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 /usr/local/share/moin/underlay && \
     apt purge -qqy ca-certificates curl patch && \
     apt autoremove -qqy && apt clean -qqy && \
-    rm -rf /tmp/* /var/lib/apt/lists/* moinmoin moin-${version}.tar.gz raw
+    rm -rf /tmp/* /var/lib/apt/lists/* $file moinmoin raw
 COPY docker.png /usr/local/lib/python2.7/dist-packages/MoinMoin/web/static/htdocs/common/
 COPY moin.sh /usr/bin/
 
