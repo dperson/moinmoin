@@ -23,7 +23,11 @@ set -o nounset                              # Treat unset variables as an error
 #   prefix) URI
 # Return: setup URI
 prefix() { local prefix="$1" file=/usr/local/share/moin/wikiconfig.py
-    sed -i '/url_prefix_static = /s|'"'.*'"'|'"'$prefix'"'|' $file
+    if [[ prefix == "/" ]]; then
+        sed -i '/^url_prefix_static = /s|^|#|' $file
+    else
+        sed -i '/url_prefix_static = /s|'"'.*'"'|'"'$prefix'"'|' $file
+    fi
 }
 
 ### super: Configure admin user for wiki
