@@ -39,8 +39,6 @@ Default Admin user is set to 'mmAdmin'. To use, create a new user named
                     /wiki required arg: "</prefix>" - URI location
         -s "<super>" Configure superuser (admin ID) for the wiki
                     required arg: "<UserName>" - The user to manage the wiki
-        -t ""       Configure timezone (defaults to EST5EDT)
-                    possible arg: "[timezone]" - zoneinfo timezone for container
 
     The 'command' (if provided and valid) will be run instead of moinmoin
 
@@ -48,7 +46,7 @@ ENVIRONMENT VARIABLES (only available with `docker run`)
 
  * `PREFIX` - An above, set a URI where the app lives, IE `/wiki2`
  * `SUPER` - As above, set the super (admin) user for the wiki
- * `TZ` - As above, configure the zoneinfo timezone, IE `EST5EDT`
+ * `TZ` - Configure the zoneinfo timezone, IE `EST5EDT`
  * `USERID` - Set the UID for the app user
  * `GROUPID` - Set the GID for the app user
 
@@ -59,17 +57,7 @@ Any of the commands can be run at creation with `docker run` or later with
 
 ### Start moinmoin, and configure the timezone:
 
-    sudo docker run -it -d dperson/moinmoin -t EST5EDT
-
-OR using `environment variables`
-
     sudo docker run -it -e TZ=EST5EDT -d dperson/moinmoin
-
-Will get you the same settings as
-
-    sudo docker run -it --name wiki -d dperson/moinmoin
-    sudo docker exec -it wiki moin.sh -t EST5EDT ls -AlF /etc/localtime
-    sudo docker restart wiki
 
 ### Start moinmoin, and configure the prefix URI:
 
