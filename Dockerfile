@@ -37,7 +37,7 @@ COPY moin.sh /usr/bin/
 EXPOSE 3031
 
 HEALTHCHECK --interval=60s --timeout=15s \
-            CMD curl -LSs http://localhost:3031/ >/dev/null
+            CMD netstat -lntp | grep -q '0\.0\.0\.0:3031'
 
 VOLUME ["/usr/local/share/moin"]
 
