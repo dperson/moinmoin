@@ -53,7 +53,7 @@ ENVIRONMENT VARIABLES (only available with `docker run`)
 ## Examples
 
 Any of the commands can be run at creation with `docker run` or later with
-`docker exec -it moin.sh` (as of version 1.3 of docker).
+`docker exec -it moin moin.sh` (as of version 1.3 of docker).
 
 ### Start moinmoin, and configure the timezone:
 
