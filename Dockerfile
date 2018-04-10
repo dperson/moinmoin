@@ -7,8 +7,8 @@ RUN file=moin-1.9.9.tar.gz && \
     url=https://bitbucket.org/thomaswaldmann/moin-1.9/commits && \
     sha256sum=4397d7760b7ae324d7914ffeb1a9eeb15e09933b61468072acd3 && \
     apk --no-cache --no-progress upgrade && \
-    apk --no-cache --no-progress add bash curl patch py2-markdown uwsgi-python \
-                shadow && \
+    apk --no-cache --no-progress add bash curl patch py2-markdown tini \
+                uwsgi-python shadow && \
     echo "downloading $file ..." && \
     curl -LOSs http://static.moinmo.in/files/$file && \
     curl -LOSs "${url}/${patch}/raw" && \
@@ -41,4 +41,4 @@ HEALTHCHECK --interval=60s --timeout=15s \
 
 VOLUME ["/usr/local/share/moin"]
 
-ENTRYPOINT ["moin.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/moin.sh"]
