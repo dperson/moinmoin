@@ -23,10 +23,10 @@ set -o nounset                              # Treat unset variables as an error
 #   prefix) URI
 # Return: setup URI
 prefix() { local prefix="$1" file=/usr/local/share/moin/wikiconfig.py
-    if [[ prefix == "/" ]]; then
+    if [[ $prefix == "/" ]]; then
         sed -i '/^url_prefix_static = /s|^|#|' $file
     else
-        sed -i '/url_prefix_static = /s|'"'.*'"'|'"'$prefix'"'|' $file
+        sed -i 's|.*\(url_prefix_static = \)|'"'$prefix'"'|' $file
     fi
 }
 
