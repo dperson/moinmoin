@@ -42,7 +42,7 @@ Default Admin user is set to 'mmAdmin'. To use, create a new user named
 
     The 'command' (if provided and valid) will be run instead of moinmoin
 
-ENVIRONMENT VARIABLES (only available with `docker run`)
+ENVIRONMENT VARIABLES
 
  * `PREFIX` - An above, set a URI where the app lives, IE `/wiki2`
  * `SUPER` - As above, set the super (admin) user for the wiki
