@@ -1,8 +1,9 @@
-FROM alpine
+FROM alpine:3.10
 MAINTAINER David Personette <dperson@gmail.com>
 
 # Install uwsgi and MoinMoin
-RUN file=moin-1.9.10.tar.gz && \
+RUN version=1.9.10 && \
+    file=moin-${version}.tar.gz && \
     sha256sum=4a264418e886082abd457c26991f4a8f4847cd1a2ffc11e10d66231da8a50 && \
     apk --no-cache --no-progress upgrade && \
     apk --no-cache --no-progress add bash curl py2-markdown tini \
