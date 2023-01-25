@@ -32,9 +32,4 @@ COPY moin.sh /usr/bin/
 
 EXPOSE 3031
 
-HEALTHCHECK --interval=60s --timeout=15s \
-            CMD netstat -lntp | grep -q '0\.0\.0\.0:3031'
-
-VOLUME ["/usr/local/share/moin"]
-
 ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/moin.sh"]
